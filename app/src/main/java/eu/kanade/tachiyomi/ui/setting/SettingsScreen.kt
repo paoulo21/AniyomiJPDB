@@ -21,6 +21,7 @@ import eu.kanade.presentation.util.DefaultNavigatorScreenTransition
 import eu.kanade.presentation.util.LocalBackPress
 import eu.kanade.presentation.util.Screen
 import eu.kanade.presentation.util.isTabletUi
+import eu.kanade.tachiyomi.ui.JPDB.JPDBSettingScreen
 import tachiyomi.presentation.core.components.TwoPanelBox
 
 class SettingsScreen(
@@ -38,6 +39,7 @@ class SettingsScreen(
                     Destination.About.id -> AboutScreen
                     Destination.DataAndStorage.id -> SettingsDataScreen
                     Destination.Tracking.id -> SettingsTrackingScreen
+                    Destination.JPDB.id -> JPDBSettingScreen()
                     else -> SettingsMainScreen
                 },
                 content = {
@@ -59,6 +61,7 @@ class SettingsScreen(
                     Destination.About.id -> AboutScreen
                     Destination.DataAndStorage.id -> SettingsDataScreen
                     Destination.Tracking.id -> SettingsTrackingScreen
+                    Destination.JPDB.id -> JPDBSettingScreen()
                     else -> SettingsAppearanceScreen
                 },
             ) {
@@ -82,5 +85,6 @@ class SettingsScreen(
         data object About : Destination(0)
         data object DataAndStorage : Destination(1)
         data object Tracking : Destination(2)
+        data object JPDB : Destination(3)
     }
 }

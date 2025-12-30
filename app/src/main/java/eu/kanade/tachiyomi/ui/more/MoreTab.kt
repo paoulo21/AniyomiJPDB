@@ -41,6 +41,7 @@ import uy.kohesive.injekt.Injekt
 import uy.kohesive.injekt.api.get
 
 data object MoreTab : Tab {
+    private fun readResolve(): Any = MoreTab
 
     override val options: TabOptions
         @Composable
@@ -72,6 +73,7 @@ data object MoreTab : Tab {
             incognitoMode = screenModel.incognitoMode,
             onIncognitoModeChange = { screenModel.incognitoMode = it },
             navStyle = navStyle,
+            onClickJPDB = { navigator.push(SettingsScreen(SettingsScreen.Destination.JPDB)) },
             onClickAlt = { navigator.push(navStyle.moreTab) },
             onClickDownloadQueue = { navigator.push(DownloadsTab) },
             onClickCategories = { navigator.push(CategoriesTab) },
