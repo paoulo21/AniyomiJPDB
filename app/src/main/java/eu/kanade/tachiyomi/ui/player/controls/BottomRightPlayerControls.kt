@@ -17,16 +17,19 @@
 
 package eu.kanade.tachiyomi.ui.player.controls
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AspectRatio
 import androidx.compose.material.icons.filled.PictureInPictureAlt
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import eu.kanade.tachiyomi.ui.player.controls.components.ControlsButton
 import eu.kanade.tachiyomi.ui.player.controls.components.FilledControlsButton
 import eu.kanade.tachiyomi.ui.player.execute
 import eu.kanade.tachiyomi.ui.player.executeLongPress
+import `is`.xyz.mpv.MPVLib
 import tachiyomi.domain.custombuttons.model.CustomButton
 
 @Composable
@@ -40,6 +43,7 @@ fun BottomRightPlayerControls(
     onPipClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val context = LocalContext.current
     Row(modifier) {
         if (skipIntroButton != null) {
             FilledControlsButton(
@@ -54,6 +58,18 @@ fun BottomRightPlayerControls(
                 onLongClick = customButton::executeLongPress,
             )
         }
+
+        ControlsButton(
+            text = "Sub",
+            onClick = {
+                val currentSubtitle = MPVLib.getPropertyString("sub-text")
+                if (!currentSubtitle.isNullOrBlank()) {
+                    Toast.makeText(context, currentSubtitle, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "No subtitle on screen", Toast.LENGTH_SHORT).show()
+                }
+            },
+        )
 
         if (isPipAvailable) {
             ControlsButton(
