@@ -130,12 +130,8 @@ fun parseJPDBResponse(jsonString: String): String {
                 }
                 result.append("\n")
 
-                if (reading.isNotEmpty()) {
-                    result.append("読: $reading\n")
-                }
-
                 if (meaningsArray != null && meaningsArray.length() > 0) {
-                    result.append("意: ")
+                    result.append("Definitions: ")
                     val definitionsList = mutableListOf<String>()
 
                     for (j in 0 until minOf(meaningsArray.length(), 2)) {
